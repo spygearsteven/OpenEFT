@@ -18,7 +18,7 @@ echo 'export PATH="$PWD/build/bin:$PATH" > ~/.bashrc'
 source ~/.bashrc
 cd ../browser/linux
  wget "https://github.com/clickot/ungoogled-chromium-binaries/releases/download/111.0.5563.65-1/ungoogled-chromium_111.0.5563.65-1.1.AppImage"
-mv ungoogled-chromium_111.0.5563.65-1.1.AppImage chrome.AppImage
+mv ungoogled-chromium_111.0.5563.65-1.1.AppImage chrome.AppImage && chmod +x chrome.AppImage
 cd ../../
 echo "Installing Pip Requirements"
 pip3 install -r requirements.txt
