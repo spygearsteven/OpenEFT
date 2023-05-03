@@ -1,10 +1,19 @@
 FROM ubuntu:20.04
+WORKDIR /tmp
+RUN apt-get update && apt-get install -y wget
+ADD https://github.com/spygearsteven/nbis/releases/download/v5.0.0/nbis-linux-amd64.tar.gz nbis-linux-amd64.tar.gz
+WORKDIR /build
+RUN tar -zxvf /tmp/nbis-linux-amd64.tar.gz -C /build/
+
+FROM ubuntu:20.04
 
 WORKDIR /app
 
 COPY . /app
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y git wget python3 python3-pip libopenjp2-tools cmake libgl1 libglib2.0-0 libx11-dev
+COPY --from=0 /build /app/build
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y git python3 python3-pip libopenjp2-tools cmake libgl1 libglib2.0-0 libx11-dev
 
 RUN pip3 install -r /app/requirements.txt
 
