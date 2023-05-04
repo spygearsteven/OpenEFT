@@ -1,6 +1,6 @@
-FROM ubuntu:20.04
+FROM alpine
 WORKDIR /tmp
-RUN apt-get update && apt-get install -y wget
+RUN apk add --no-cache wget tar
 ADD https://github.com/spygearsteven/nbis/releases/download/v5.0.0/nbis-linux-amd64.tar.gz nbis-linux-amd64.tar.gz
 WORKDIR /build
 RUN tar -zxvf /tmp/nbis-linux-amd64.tar.gz -C /build/
