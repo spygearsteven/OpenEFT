@@ -13,8 +13,9 @@ COPY . /app
 
 COPY --from=0 /build /app/build
 
-RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y git python3 python3-pip libopenjp2-tools cmake libgl1 libglib2.0-0 libx11-dev
+ENV PATH "$PATH:/app/build/bin"
 
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC apt-get install -y git python3 python3-pip libopenjp2-tools libgl1 libglib2.0-0 libx11-dev
 RUN pip3 install -r /app/requirements.txt
 
 EXPOSE 7100
